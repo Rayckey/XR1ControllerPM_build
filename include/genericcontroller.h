@@ -58,6 +58,8 @@ public:
     //Transform 3d vector into Skew Matrix
     virtual Matrix3d Hatty_Hattington(Vector3d input);
 
+    virtual void setPeriod(double reading_interval_in_second);
+
 protected:
     VectorXd Joint_Angles;
     VectorXd Joint_Velocities;
@@ -72,9 +74,11 @@ protected:
 
     double tinyFilter(double new_v , double old_v);
 
-    double simpleFilter(double new_val , double input , double ratios);
+    double simpleFilter(double new_val , double old_val , double ratios);
 
-    Vector3d simpleFilter(Vector3d new_val , Vector3d input , double ratios);
+    VectorXd simpleFilter(VectorXd new_val , VectorXd old_val , double ratios);
+
+    double sign(double input);
 };
 
 #endif // GENERICCONTROLLER_H

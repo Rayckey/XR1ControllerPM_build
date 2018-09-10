@@ -50,14 +50,14 @@ public:
     void setJointVelocity(u_int8_t joint_idx ,   double JV);
 
 
-    //Set the Target Joint Positions for an entire control group, i.e. LeftARM , RightHand
+    //Set the Target Joint Currents for an entire control group, i.e. LeftARM , RightHand
     //Used in the XR1Controller
     //Argu: Control Group ID , Target Current
     //Reutrns : void , may add error message in the fulture
     void setJointCurrent(u_int8_t control_group , VectorXd JC);
 
 
-    //Set the Target Joint Velocity for a single joint, i.e. LeftShoulderX , RightWristZ
+    //Set the Target Joint Currents for a single joint, i.e. LeftShoulderX , RightWristZ
     //Used in the XR1Controller
     //Argu: Control Group ID , Angular Velocity contained in std::vector<double>
     //Reutrns : void , may add error message in the fulture
@@ -68,7 +68,7 @@ public:
     //Used in the XR1Controller
     //Argu: Control Group ID
     //Reutrns : JointAngles contained in Eigen::VectorXd
-    VectorXd getJointPositions(u_int8_t control_group);
+    VectorXd getJointPositions(u_int8_t control_group , bool vanilla = false);
 
 
     //Get the Current Joint Angles for an entire control group, i.e. LeftARM , RightHand
@@ -82,7 +82,7 @@ public:
     //Used in the XR1Controller
     //Argu: Control Group ID
     //Reutrns : Joint Velocities contained in Eigen::VectorXd
-    VectorXd getJointVelocities(u_int8_t control_group);
+    VectorXd getJointVelocities(u_int8_t control_group , bool vanilla = false);
 
 
     //Get the Current Joint Velocites for an entire control group, i.e. LeftARM , RightHand
@@ -96,7 +96,7 @@ public:
     //Used in the XR1Controller
     //Argu: Control Group ID
     //Reutrns : Joint Currents contained in Eigen::VectorXd
-    VectorXd getJointCurrents(u_int8_t control_group);
+    VectorXd getJointCurrents(u_int8_t control_group , bool vanilla = false);
 
 
     //Get the Current Joint Currents for an entire control group, i.e. LeftARM , RightHand
@@ -107,11 +107,17 @@ public:
 
 
 
-    double getTargetJointPosition(u_int8_t joint_id);
+    double getTargetJointPosition(u_int8_t joint_id , bool vanilla = false);
 
-    double getTargetJointVelocity(u_int8_t joint_id);
+    double getTargetJointVelocity(u_int8_t joint_id , bool vanilla = false);
 
-    double getTargetJointCurrent(u_int8_t joint_id);
+    double getTargetJointCurrent(u_int8_t joint_id , bool vanilla = false);
+
+    double getJointPosition(u_int8_t joint_id , bool vanilla = false);
+
+    double getJointVelocity(u_int8_t joint_id , bool vanilla = false);
+
+    double getJointCurrent(u_int8_t joint_id , bool vanilla = false);
 
     //Set the Control Method for an entire Control Group , i.e. LeftARM , RightHand
     //Used in the XR1Controller
@@ -273,13 +279,13 @@ public:
 
 
     //Get Target Position for Arms or Body
-    VectorXd getTargetPosition(u_int8_t control_group);
+    VectorXd getTargetPosition(u_int8_t control_group , bool vanilla = false);
 
     //Get Target velocity for Arms or Body
-    VectorXd getTargetVelocity(u_int8_t control_group);
+    VectorXd getTargetVelocity(u_int8_t control_group , bool vanilla = false);
 
     //Get Target Current for Arms or Body
-    VectorXd getTargetCurrent(u_int8_t control_group);
+    VectorXd getTargetCurrent(u_int8_t control_group , bool vanilla = false);
 
 
     // Trigger the Calcualtions
@@ -298,6 +304,7 @@ public:
 
     void SetOmniWheelsVelocity(Vector3d input, bool skate_mode);
 
+    void setPeriod(u_int8_t control_group , double period);
 
 private:
 
